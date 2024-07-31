@@ -57,7 +57,16 @@ for (let i = 0; i < games.length; i++) {
         // append the game to the games-container
 
 }
-addGamesToPage(GAMES_JSON)
+function getFundedGames() {
+    return GAMES_JSON.filter(game => game.pledged >= game.goal);
+}
+
+// Call getFundedGames and addGamesToPage on page load
+document.addEventListener('DOMContentLoaded', () => {
+    const fundedGames = getFundedGames();
+    addGamesToPage(fundedGames);
+});
+
 
 // call the function we just defined using the correct variable
 // later, we'll call this function using a different list of games
@@ -140,7 +149,7 @@ function filterFundedOnly() {
 // show all games
 function showAllGames() {
     deleteChildElements(gamesContainer);
-    addGamesToPage(GAMES_JSON);
+    addGamesToPage(GAMES_JSON); 
 
 
 }
